@@ -185,25 +185,35 @@ vnoremap // :TComment<CR>
 " scheme
 " ===========================================================================
 Bundle 'molokai'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Lokaltog/vim-powerline'
 if has("gui_running")	" GUI color and font settings
   if has("mac")
       set guifont=PragmataPro:h16
   else
       set guifont=PragmataPro\ 12
   endif
-  set background=dark 
+  set background=light
   set cursorline        " highlight current line
   "colors moria
   highlight CursorLine          guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
   set cursorline        " highlight current line
+  set background=dark
   "colors molokai
 endif
-colors molokai
-Bundle 'Lokaltog/vim-powerline'
+"colors molokai
+"let g:solarized_termcolors=256
+colors solarized
 let g:Powerline_symbols='unicode'
+" By default vim is set not to show the statusline when there is only a single
+" window.
+set laststatus=2
 
+" ===========================================================================
+" misc
+" ===========================================================================
 Bundle 'jQuery'
 Bundle 'repeat.vim'
 Bundle 'Align'
