@@ -145,6 +145,7 @@ cmap cd. lcd %:p:h
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
 "--------------------------------------------------------------------------- 
+" TODO Bundle 'FencView.vim'
 set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -193,7 +194,7 @@ if has("gui_running")	" GUI color and font settings
   else
       set guifont=PragmataPro\ 12
   endif
-  set background=light
+  set background=dark
   set cursorline        " highlight current line
   "colors moria
   highlight CursorLine          guibg=#003853 ctermbg=24  gui=none cterm=none
@@ -222,6 +223,9 @@ Bundle 'Spaceghost/vim-matchit'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'othree/html5.vim'
 Bundle 'gre/play2vim'
+Bundle 'maksimr/vim-jsbeautify'
+Bundle 'skammer/vim-css-color'
+Bundle 'YankRing.vim'
 
 " ===========================================================================
 " Ack
@@ -288,6 +292,23 @@ Bundle "majutsushi/tagbar"
 nnoremap <silent> <F7> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_autoclose = 1
+
+let g:tagbar_type_c = {
+    \ 'kinds' : [
+        \ 'd:macros:1:0',
+        \ 'p:prototypes:1:0',
+        \ 'g:enums:1:0',
+        \ 'e:enumerators:1:0',
+        \ 't:typedefs:1:0',
+        \ 's:structs:1:0',
+        \ 'u:unions:1:0',
+        \ 'm:members:0:0',
+        \ 'v:variables:0:0',
+        \ 'f:functions',
+    \ ],
+\ }
 
 " support fo additional filetypes. https://github.com/majutsushi/tagbar/wiki
 " scala
