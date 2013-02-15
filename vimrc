@@ -8,11 +8,6 @@ set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 
 filetype off          " necessary to make ftdetect work on Linux
-syntax on
-filetype on           " Enable filetype detection
-filetype indent on    " Enable filetype-specific indenting
-filetype plugin on    " Enable filetype-specific plugins
-
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -21,7 +16,6 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 set t_Co=256          " 256 color mode
 syntax on		" syntax highlight
 set hlsearch		" search highlighting
-
 
 set clipboard=unnamed	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
@@ -241,7 +235,7 @@ set guioptions-=L
 Bundle 'scrooloose/syntastic'
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'js'], 'passive_filetypes': ['html', 'css', 'slim'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'js'], 'passive_filetypes': ['html', 'css', 'slim'] }
 
 " ===========================================================================
 " git
@@ -285,6 +279,34 @@ nnoremap <silent> <F7> :TagbarToggle<CR>
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
 
+" support fo additional filetypes. https://github.com/majutsushi/tagbar/wiki
+" scala
+let g:tagbar_type_scala = {
+    \ 'ctagstype' : 'Scala',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }
+
+" Markdown
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+
 " ===========================================================================
 " Snippet
 " ===========================================================================
@@ -298,3 +320,5 @@ Bundle "https://github.com/honza/snipmate-snippets.git"
 Bundle "deepking/vimisc"
 nmap K <esc>:Man <cword><cr>
 
+
+filetype plugin indent on "required after vundle config
