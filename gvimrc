@@ -7,7 +7,7 @@
 
 if has("gui_macvim")
     set guioptions-=T
-    set showtabline=2 " always show tabs :h showtabline
+    set showtabline=1 " always show tabs :h showtabline
 endif
 
 set vb t_vb=

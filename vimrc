@@ -142,6 +142,9 @@ vnoremap > >gv
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
 
+imap <c-v> <ESC>"+pA
+vnoremap <C-C> "+y
+
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
 "--------------------------------------------------------------------------- 
@@ -185,12 +188,12 @@ vnoremap // :TComment<CR>
 " ===========================================================================
 " scheme
 " ===========================================================================
-Bundle 'molokai'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-powerline'
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 if has("gui_running")	" GUI color and font settings
   if has("mac")
-      set guifont=PragmataPro:h16
+      set guifont=PragmataPro:h14
   else
       set guifont=PragmataPro\ 12
   endif
@@ -212,6 +215,16 @@ let g:Powerline_symbols='unicode'
 " window.
 set laststatus=2
 
+" Fix terminal timeout when pressing escape
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
 " ===========================================================================
 " misc
 " ===========================================================================
@@ -226,6 +239,10 @@ Bundle 'gre/play2vim'
 Bundle 'maksimr/vim-jsbeautify'
 Bundle 'skammer/vim-css-color'
 Bundle 'YankRing.vim'
+Bundle 'benmills/vimux'
+Bundle 'troydm/easybuffer.vim'
+Bundle 'AndrewRadev/multichange.vim'
+Bundle 'jszakmeister/vim-togglecursor'
 
 " ===========================================================================
 " Ack
@@ -249,14 +266,16 @@ set guioptions-=L
 Bundle 'scrooloose/syntastic'
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'js'], 'passive_filetypes': ['html', 'css', 'slim'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'js', 'coffee', 'python'], 'passive_filetypes': ['html', 'css', 'slim'] }
 
 " ===========================================================================
 " git
 " ===========================================================================
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
-"Bundle 'gregsexton/giv'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'gregsexton/gitv'
+Bundle 'sjl/splice.vim'
 autocmd FileType gitcommit set tw=68 spell
 autocmd FileType gitcommit setlocal foldmethod=manual
 
@@ -266,7 +285,12 @@ autocmd FileType gitcommit setlocal foldmethod=manual
 Bundle 'kien/ctrlp.vim'
 map <c-s-r> :CtrlPMRUFiles<cr>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore='\.git$\|\.hg$\|\.svn$'
+"let g:ctrlp_custom_ignore='\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_custom_ignore = { 
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$', 
+            \ 'file': '\v\.(exe|so|dll|out|)$', 
+            \ 'link': '', 
+            \ }
 let g:ctrlp_user_command='find %s -type f'
 
 " ===========================================================================
@@ -316,7 +340,7 @@ let g:tagbar_type_scala = {
     \ 'ctagstype' : 'Scala',
     \ 'kinds'     : [
         \ 'p:packages:1',
-        \ 'V:values',
+        \ 'V:values:1',
         \ 'v:variables',
         \ 'T:types',
         \ 't:traits',
@@ -338,12 +362,25 @@ let g:tagbar_type_markdown = {
     \ ]
 \ }
 
+"CoffeeScript
+let g:tagbar_type_coffee = {
+\ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+        \ 'c:class',
+        \ 'm:method',
+        \ 'f:function',
+        \ 'v:variable',
+        \ 'f:field',
+    \ ]
+\ }
+
 " ===========================================================================
 " Snippet
 " ===========================================================================
 Bundle "http://github.com/gmarik/snipmate.vim.git"
 let g:snipMateAllowMatchingDot = 0
-Bundle "https://github.com/honza/snipmate-snippets.git"
+"Bundle "https://github.com/honza/snipmate-snippets.git"
+Bundle "carlosvillu/coffeScript-VIM-Snippets"
 
 " ===========================================================================
 " vimisc
@@ -351,5 +388,30 @@ Bundle "https://github.com/honza/snipmate-snippets.git"
 Bundle "deepking/vimisc"
 nmap K <esc>:Man <cword><cr>
 
+" ===========================================================================
+" reStructuredText
+" ===========================================================================
+Bundle "Rykka/riv.vim"
 
-filetype plugin indent on "required after vundle config
+" ===========================================================================
+" Coffee Script
+" ===========================================================================
+Bundle "kchmck/vim-coffee-script"
+" To compile a file when it is written
+"au BufWritePost *.coffee silent CoffeeMake!
+au BufWritePost *.coffee silent CoffeeMake! | cwindow | redraw!
+" To fold by indentation in CoffeeScript files
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+" two space indentation
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+"let coffee_compile_vert = 1
+
+" ===========================================================================
+" python
+" ===========================================================================
+Bundle "python.vim"
+
+" ===========================================================================
+" required after vundle config
+" ===========================================================================
+filetype plugin indent on
