@@ -1,13 +1,75 @@
+set nocompatible      " not compatible with the old-fashion vi mode
+filetype off          " necessary to make ftdetect work on Linux
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+Plugin 'gmarik/vundle'
+
+Plugin 'FencView.vim'
+Plugin 'tComment'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'jQuery'
+Plugin 'repeat.vim'
+Plugin 'Align'
+Plugin 'surround.vim'
+Plugin 'Spaceghost/vim-matchit'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'othree/html5.vim'
+Plugin 'gre/play2vim'
+" Plugin 'maksimr/vim-jsbeautify'
+" Plugin 'skammer/vim-css-color'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'YankRing.vim'
+Plugin 'benmills/vimux'
+Plugin 'troydm/easybuffer.vim'
+Plugin 'https://github.com/AndrewRadev/multichange.vim.git'
+Plugin 'jszakmeister/vim-togglecursor'
+Plugin 'pangloss/vim-javascript'
+Plugin 'gkz/vim-ls'
+"Plugin 'mikelue/vim-maven-plugin'
+"Plugin 'lgafgarland/typescript-vim'
+Plugin 'https://github.com/leafgarland/typescript-vim.git'
+Plugin 'https://github.com/mxw/vim-jsx.git'
+
+Plugin 'https://github.com/suan/vim-instant-markdown.git'
+Plugin 'ack.vim'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/syntastic'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'gregsexton/gitv'
+Plugin 'sjl/splice.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'python.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'SuperTab'
+Plugin 'majutsushi/tagbar'
+Plugin 'http://github.com/gmarik/snipmate.vim.git'
+" Plugin 'https://github.com/honza/snipmate-snippets.git'
+Plugin 'carlosvillu/coffeScript-VIM-Snippets'
+Plugin 'deepking/vimisc'
+"Plugin 'Rykka/riv.vim'
+Plugin 'kchmck/vim-coffee-script'
+call vundle#end()
+filetype plugin indent on
+
 " ===========================================================================
 " General Settings
 " ===========================================================================
-set nocompatible	" not compatible with the old-fashion vi mode
+
+" set backupdir=~/.vim/backup//
+" set directory=~/.vim/swap//
+" set undodir=~/.vim/undo//
+set noswapfile
+
 set bs=2		" allow backspacing over everything in insert mode
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 
-filetype off          " necessary to make ftdetect work on Linux
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -44,7 +106,6 @@ set tm=500
    set expandtab        "replace <TAB> with spaces
    set softtabstop=4 
    set shiftwidth=4 
-
    au FileType Makefile set noexpandtab
 "}      							
 
@@ -148,7 +209,6 @@ vnoremap <C-C> "+y
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
 "--------------------------------------------------------------------------- 
-" TODO Bundle 'FencView.vim'
 set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -174,26 +234,20 @@ endfun
 " ===========================================================================
 " vundle
 " ===========================================================================
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
 
 " ===========================================================================
 " tComment
 " ===========================================================================
-Bundle "tComment"
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " ===========================================================================
 " scheme
 " ===========================================================================
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lokaltog/vim-powerline'
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 if has("gui_running")	" GUI color and font settings
   if has("mac")
-      set guifont=PragmataPro:h14
+      set guifont=PragmataPro:h13
   else
       set guifont=PragmataPro\ 12
   endif
@@ -228,33 +282,17 @@ endif
 " ===========================================================================
 " misc
 " ===========================================================================
-Bundle 'jQuery'
-Bundle 'repeat.vim'
-Bundle 'Align'
-Bundle "surround.vim"
-Bundle 'Spaceghost/vim-matchit'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'othree/html5.vim'
-Bundle 'gre/play2vim'
-Bundle 'maksimr/vim-jsbeautify'
-Bundle 'skammer/vim-css-color'
-Bundle 'YankRing.vim'
-Bundle 'benmills/vimux'
-Bundle 'troydm/easybuffer.vim'
-Bundle 'AndrewRadev/multichange.vim'
-Bundle 'jszakmeister/vim-togglecursor'
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " ===========================================================================
 " Ack
 " ===========================================================================
-Bundle "ack.vim"
 noremap <LocalLeader># "ayiw:Ack <C-r>a<CR>
 vnoremap <LocalLeader># "ay:Ack <C-r>a<CR>
 
 " ===========================================================================
 " nerdtree
 " ===========================================================================
-Bundle 'scrooloose/nerdtree'
 nmap <C-n> :NERDTreeToggle<CR>
 " Disable the scrollbars (NERDTree)
 set guioptions-=r
@@ -263,26 +301,19 @@ set guioptions-=L
 " ===========================================================================
 " syntastic
 " ===========================================================================
-Bundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'js', 'coffee', 'python'], 'passive_filetypes': ['html', 'css', 'slim'] }
+" let g:syntastic_enable_signs=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'js', 'coffee', 'python'], 'passive_filetypes': ['html', 'css', 'slim'] }
 
 " ===========================================================================
 " git
 " ===========================================================================
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'gregsexton/gitv'
-Bundle 'sjl/splice.vim'
 autocmd FileType gitcommit set tw=68 spell
 autocmd FileType gitcommit setlocal foldmethod=manual
 
 " ===========================================================================
 " ctrlp
 " ===========================================================================
-Bundle 'kien/ctrlp.vim'
 map <c-s-r> :CtrlPMRUFiles<cr>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 "let g:ctrlp_custom_ignore='\.git$\|\.hg$\|\.svn$'
@@ -296,7 +327,6 @@ let g:ctrlp_user_command='find %s -type f'
 " ===========================================================================
 " easymotion
 " ===========================================================================
-Bundle 'Lokaltog/vim-easymotion'
 "let g:EasyMotion_leader_key = '<Leader>m' " default is <Leader>w
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
@@ -304,7 +334,6 @@ hi link EasyMotionShade  Comment
 " ===========================================================================
 " SuperTab
 " ===========================================================================
-Bundle "SuperTab"
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
@@ -312,7 +341,6 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " ===========================================================================
 " TagBar
 " ===========================================================================
-Bundle "majutsushi/tagbar"
 nnoremap <silent> <F7> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
@@ -377,26 +405,20 @@ let g:tagbar_type_coffee = {
 " ===========================================================================
 " Snippet
 " ===========================================================================
-Bundle "http://github.com/gmarik/snipmate.vim.git"
 let g:snipMateAllowMatchingDot = 0
-"Bundle "https://github.com/honza/snipmate-snippets.git"
-Bundle "carlosvillu/coffeScript-VIM-Snippets"
 
 " ===========================================================================
 " vimisc
 " ===========================================================================
-Bundle "deepking/vimisc"
 nmap K <esc>:Man <cword><cr>
 
 " ===========================================================================
 " reStructuredText
 " ===========================================================================
-Bundle "Rykka/riv.vim"
 
 " ===========================================================================
 " Coffee Script
 " ===========================================================================
-Bundle "kchmck/vim-coffee-script"
 " To compile a file when it is written
 "au BufWritePost *.coffee silent CoffeeMake!
 au BufWritePost *.coffee silent CoffeeMake! | cwindow | redraw!
@@ -406,12 +428,40 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 "let coffee_compile_vert = 1
 
+au BufNewFile,BufReadPost *.js setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.ls setl shiftwidth=2 expandtab
+hi link lsSpaceError NONE
+hi link lsReservedError NONE
+autocmd BufNewFile,BufRead *.ls set filetype=ls
+autocmd BufNewFile,BufRead *Slakefile set filetype=ls
+"au BufWritePost *.ls silent LiveScriptMake! -b | cwindow | redraw!
+au BufNewFile,BufReadPost *.ls setl foldmethod=indent nofoldenable
+autocmd BufNewFile,BufRead *.tpl set filetype=groovy
+
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+let g:typescript_compiler_options = '--target ES6 -sourcemap'
 " ===========================================================================
 " python
 " ===========================================================================
-Bundle "python.vim"
+
+let g:javascript_conceal=1
 
 " ===========================================================================
 " required after vundle config
 " ===========================================================================
-filetype plugin indent on
+
+
+
+function! LoadPython()
+    if has('python')
+      echo 'there is Python 2.x'
+python << EOF
+print('hello world')
+EOF
+    elseif has('python3')
+      echo 'there is Python 3.x'
+python3 << EOF
+print('hello world')
+EOF
+    endif
+endfunction
