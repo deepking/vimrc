@@ -8,7 +8,6 @@ Plugin 'gmarik/vundle'
 Plugin 'FencView.vim'
 Plugin 'tComment'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'jQuery'
 Plugin 'repeat.vim'
 Plugin 'Align'
@@ -28,7 +27,6 @@ Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'pangloss/vim-javascript'
 Plugin 'gkz/vim-ls'
 "Plugin 'mikelue/vim-maven-plugin'
-"Plugin 'lgafgarland/typescript-vim'
 Plugin 'https://github.com/leafgarland/typescript-vim.git'
 Plugin 'https://github.com/mxw/vim-jsx.git'
 
@@ -53,6 +51,8 @@ Plugin 'carlosvillu/coffeScript-VIM-Snippets'
 Plugin 'deepking/vimisc'
 "Plugin 'Rykka/riv.vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-airline'
 call vundle#end()
 filetype plugin indent on
 
@@ -413,10 +413,6 @@ let g:snipMateAllowMatchingDot = 0
 nmap K <esc>:Man <cword><cr>
 
 " ===========================================================================
-" reStructuredText
-" ===========================================================================
-
-" ===========================================================================
 " Coffee Script
 " ===========================================================================
 " To compile a file when it is written
@@ -440,16 +436,33 @@ autocmd BufNewFile,BufRead *.tpl set filetype=groovy
 
 autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 let g:typescript_compiler_options = '--target ES6 -sourcemap'
-" ===========================================================================
-" python
-" ===========================================================================
 
 let g:javascript_conceal=1
 
-" ===========================================================================
-" required after vundle config
-" ===========================================================================
+function! AirLineInit()
+    let g:airline_powerline_fonts = 1
 
+    " enable tabline
+    let g:airline#extensions#tabline#enabled = 1
+    " set left separator
+    let g:airline#extensions#tabline#left_sep = ' '
+    " set left separator which are not editting
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    " show buffer number
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+    " let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
+    " let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
+    " let g:airline_section_c = airline#section#create(['filetype'])
+    " let g:airline_section_x = airline#section#create(['%P'])
+    " let g:airline_section_y = airline#section#create(['%B'])
+    " let g:airline_section_z = airline#section#create_right(['%l', '%c'])
+
+    " theme https://github.com/bling/vim-airline/wiki/Screenshots
+    let g:airline_theme='dark'
+endfunction
+
+autocmd VimEnter * call AirLineInit()
 
 
 function! LoadPython()
@@ -465,3 +478,44 @@ print('hello world')
 EOF
     endif
 endfunction
+
+" http://vimawesome.com/
+"
+" install powerline fonts
+" $ mkdir .font/
+" $ cd .font/
+" $ git clone https://github.com/Lokaltog/powerline-fonts.git 
+" $ cd powerline-fonts/
+" $ ./install.sh
+
+" :bn跳下一個buffer
+" :bp往上一個buffer
+" :b n 跳往第n個buffer
+" :bd關掉目前buffer
+
+" gx - goto to link
+" On Gnome and Mac OS X it's already use gnome-open/open. 
+" Generally you can set g:netrw_browsex_viewer to anything youetwant.
+"
+" gf - goto to file
+" <c-w>f 	open in a new window (Ctrl-w f)
+" <c-w>gf 	open in a new tab (Ctrl-w gf) 
+"
+" c-o goto prev location
+"
+" undo undo
+" ```
+" :undolist
+" :undo #
+" ```
+"
+" vim release note
+" ```
+" :help version7.4
+" ```
+"
+" c-] 進入link
+" c-t 回到上一個位置
+
+" reopen buffer as sudo
+" cmap w!! w !sudo tee % >/dev/null

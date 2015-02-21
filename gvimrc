@@ -8,6 +8,7 @@
 if has("gui_macvim")
     set guioptions-=T
     set showtabline=1 " always show tabs :h showtabline
+    "set guifont=Literation_Mono_Powerline:h16
 endif
 
 set vb t_vb=
