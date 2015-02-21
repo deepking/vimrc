@@ -440,7 +440,7 @@ let g:typescript_compiler_options = '--target ES6 -sourcemap'
 let g:javascript_conceal=1
 
 function! AirLineInit()
-    let g:airline_powerline_fonts = 1
+    "let g:airline_powerline_fonts = 1
 
     " enable tabline
     let g:airline#extensions#tabline#enabled = 1
