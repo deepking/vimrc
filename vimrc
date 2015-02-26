@@ -1,3 +1,7 @@
+" required plugin
+" npm -g install instant-markdown-d
+"
+
 set nocompatible      " not compatible with the old-fashion vi mode
 filetype off          " necessary to make ftdetect work on Linux
 
@@ -19,7 +23,7 @@ Plugin 'gre/play2vim'
 " Plugin 'maksimr/vim-jsbeautify'
 " Plugin 'skammer/vim-css-color'
 Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'YankRing.vim'
+" Plugin 'YankRing.vim'
 Plugin 'benmills/vimux'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'https://github.com/AndrewRadev/multichange.vim.git'
@@ -47,7 +51,7 @@ Plugin 'SuperTab'
 Plugin 'majutsushi/tagbar'
 Plugin 'http://github.com/gmarik/snipmate.vim.git'
 " Plugin 'https://github.com/honza/snipmate-snippets.git'
-Plugin 'carlosvillu/coffeScript-VIM-Snippets'
+"Plugin 'carlosvillu/coffeScript-VIM-Snippets'
 Plugin 'deepking/vimisc'
 "Plugin 'Rykka/riv.vim'
 Plugin 'kchmck/vim-coffee-script'
