@@ -54,6 +54,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'evanmiller/nginx-vim-syntax'
 call vundle#end()
 filetype plugin indent on
 
