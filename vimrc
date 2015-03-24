@@ -1,6 +1,8 @@
 " required plugin
 " npm -g install instant-markdown-d
-"
+" ctags
+" cscope
+" ack
 
 set nocompatible      " not compatible with the old-fashion vi mode
 filetype off          " necessary to make ftdetect work on Linux
@@ -59,6 +61,8 @@ Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'https://github.com/spiiph/vim-space.git'
+" https://github.com/tpope/vim-scriptease.git
 call vundle#end()
 filetype plugin indent on
 
@@ -253,7 +257,7 @@ vnoremap // :TComment<CR>
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 if has("gui_running")	" GUI color and font settings
   if has("mac")
-      set guifont=PragmataPro:h13
+      set guifont=Monaco:h13
   else
       set guifont=PragmataPro\ 12
   endif
@@ -416,7 +420,7 @@ let g:snipMateAllowMatchingDot = 0
 " ===========================================================================
 " vimisc
 " ===========================================================================
-nmap K <esc>:Man <cword><cr>
+au BufNewFile,BufReadPost *.c nmap K <esc>:Man <cword><cr>
 
 " ===========================================================================
 " Coffee Script
